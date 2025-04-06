@@ -87,7 +87,7 @@ const ChangePhonePage = ({ navigation }: any) => {
     return (
         <View className='container mx-auto text-center bg-base-100 h-screen p-4 pt-8'>
             <Text className='text-xl mb-1'>Update Phone Number:</Text>
-            <View className='relative drop-shadow-sm bg-white rounded-lg p-2'>
+            <View className='relative bg-white rounded-lg p-2'>
             <Picker
                 style={{ width: 120 , position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 1 , backgroundColor: 'white'}}
                 selectedValue={formattedCountryCode}

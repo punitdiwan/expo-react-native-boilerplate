@@ -36,8 +36,8 @@ export default function AuthLayout({ children, subChildren, hideSSO = false }: {
     return (
         <View className="container mx-auto items-center justify-center bg-black h-screen">
             <Logo />
-            <View className="flex justify-center px-4 w-full pt-8 shadow-lg rounded-lg">
-                <View className="flex justify-center p-4 bg-white rounded-lg shadow-lg w-full border-2 border-gray-200">
+            <View className="flex justify-center px-4 w-full pt-8 rounded-lg">
+                <View className="flex justify-center p-4 bg-white rounded-lg w-full border-2 border-gray-200">
                     {children}
                 </View>
             </View>

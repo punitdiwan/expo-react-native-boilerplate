@@ -160,7 +160,7 @@ const SingleInbox = ({ self, item, navigation }: { self: User | undefined, item:
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Chat', { inbox: JSON.stringify(item) })}>
         <View
-        className='relative flex flex-row p-4 bg-base-100 mt-2 border-b border-gray-200 drop-shadow-lg'>
+        className='relative flex flex-row p-4 bg-base-100 mt-2 border-b border-gray-200'>
             <View className='flex flex-row items-center'>
                 <Image className='w-12 h-12 rounded-full' source={{ uri: 'https://fastly.picsum.photos/id/616/200/200.jpg?hmac=QEzyEzU6nVn4d_vdALhsT9UAtTUEVhwrT-kM5ogBqKM' }} />
             </View>
