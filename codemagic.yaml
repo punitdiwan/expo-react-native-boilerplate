@@ -1,0 +1,43 @@
+# Check out https://docs.codemagic.io/yaml/building-a-react-native-app/ for more information
+# Please review and update values
+
+workflows:
+  react-native-android:
+    name: Expo React Redux Boilerplate
+    max_build_duration: 120
+    environment:
+      vars:
+        PACKAGE_NAME: "com.maitretech.boilerplate" 
+      node: 16.14.2
+    triggering:
+      events:
+          - push
+          - tag
+          - pull_request
+      branch_patterns:
+          - pattern: main
+            include: true
+            source: true
+    scripts:
+      - name: Install dependencies and Expo CLI, and eject app
+        script: |
+          yarn install
+          yarn global add expo-cli
+          expo eject
+      - name: Set up app/build.gradle
+        script: |
+          mv ./support-files/build.gradle android/app
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"          
+      - name: Build Android release
+        script: |
+          LATEST_GOOGLE_PLAY_BUILD_NUMBER=1.0.0
+          cd android
+          ./gradlew bundleRelease \
+            -PversionCode=$LATEST_GOOGLE_PLAY_BUILD_NUMBER \
+            -PversionName=1.0.0
+    artifacts:
+        - android/app/build/outputs/**/*.aab
+
+  
