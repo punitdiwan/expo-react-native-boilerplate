@@ -23,6 +23,7 @@ workflows:
         script: |
           yarn install
           yarn global add expo-cli
+          npx expo install react-native-svg
           expo eject
       - name: Set Android SDK location
         script: |
