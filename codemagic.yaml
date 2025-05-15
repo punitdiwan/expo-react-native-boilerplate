@@ -8,7 +8,7 @@ workflows:
     environment:
       vars:
         PACKAGE_NAME: "com.maitretech.boilerplate" 
-      node: 20.0.0
+      node: 22.15.1
     triggering:
       events:
           - push
