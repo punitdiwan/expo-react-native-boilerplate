@@ -22,7 +22,6 @@ workflows:
       - name: Install dependencies and Expo CLI, and eject app
         script: |
           yarn install
-          yarn global add expo-cli
           npx expo install react-native-svg
           npx expo install @react-native-picker/picker
           npx expo install @shopify/flash-list
