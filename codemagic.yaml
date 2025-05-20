@@ -1,0 +1,43 @@
+# Check out https://docs.codemagic.io/yaml/building-a-react-native-app/ for more information
+# Please review and update values
+
+workflows:
+  react-native-android:
+    name: expo-react-native-boilerplate
+    max_build_duration: 60
+    environment:
+      vars:
+        PACKAGE_NAME: "com.maintretech.boilerplate" 
+      node: 20.9.0
+    triggering:
+      events:
+          - push
+          - tag
+          - pull_request
+      branch_patterns:
+          - pattern: main
+            include: true
+            source: true
+    scripts:
+      - name: Install dependencies and Expo CLI, and eject app
+        script: |
+          yarn install
+          yarn global add expo-cli
+          npx expo install react-native-svg
+          npx expo install @react-native-picker/picker
+          npx expo install @shopify/flash-list
+          npx expo install react-native-pager-view
+          npx expo prebuild -p android
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"          
+      - name: Build Android release
+        script: |
+          LATEST_GOOGLE_PLAY_BUILD_NUMBER=1.0.51
+          cd android
+          ./gradlew bundleRelease \
+            -PversionCode=$LATEST_GOOGLE_PLAY_BUILD_NUMBER \
+            -PversionName=$LATEST_GOOGLE_PLAY_BUILD_NUMBER
+    artifacts:
+        - android/app/build/outputs/**/*.aab
+
