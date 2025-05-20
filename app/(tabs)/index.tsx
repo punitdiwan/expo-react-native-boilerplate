@@ -5,8 +5,27 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { remoteConfig } from '@/lib/firebase';
+import { useEffect, useState } from 'react';
 
 export default function HomeScreen() {
+  const [welcomeMessage, setWelcomeMessage] = useState('');
+  
+  useEffect(() => {
+    const loadRemoteConfig = async () => {
+      await remoteConfig().setDefaults({
+        welcome_message: 'Hello from Remote Config',
+      });
+
+      await remoteConfig().fetchAndActivate();
+      const value = remoteConfig().getValue('welcome_message').asString();
+      setWelcomeMessage(value);
+      console.log('Remote config:', value);
+    };
+
+    loadRemoteConfig();
+  }, []);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -17,7 +36,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Welcome! {welcomeMessage||"Hello from Remote Config"}</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
