@@ -35,7 +35,7 @@ workflows:
         script: |
           LATEST_GOOGLE_PLAY_BUILD_NUMBER=1.0.51
           cd android
-          ./gradlew assembleDebug \
+          ./gradlew assembleRelease \
             -PversionCode=$LATEST_GOOGLE_PLAY_BUILD_NUMBER \
             -PversionName=$LATEST_GOOGLE_PLAY_BUILD_NUMBER
     artifacts:
