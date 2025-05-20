@@ -8,7 +8,7 @@ workflows:
     environment:
       vars:
         PACKAGE_NAME: "com.maintretech.boilerplate" 
-      node: 20.9.0
+      node: 20.18.1
     triggering:
       events:
           - push
