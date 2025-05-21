@@ -27,7 +27,7 @@ workflows:
           npx expo install @react-native-picker/picker
           npx expo install @shopify/flash-list
           npx expo install react-native-pager-view
-          npx expo prebuild -p android
+          chmod -R 777 android
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"          
