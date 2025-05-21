@@ -1,11 +1,13 @@
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import codePush from "@revopush/react-native-code-push";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { ReactNode } from 'react';
 import 'react-native-reanimated';
 
-export default function RootLayout() {
+let RootLayout: ()=>ReactNode = ()=> {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -26,3 +28,5 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+export default codePush(RootLayout);
